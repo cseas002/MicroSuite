@@ -5,7 +5,7 @@ services:
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     volumes:
-        - /microsuite/MicroSuite:/home/data
+        - ~/MicroSuite:/home/data
     expose:
         - "50050"
     cap_add:
@@ -17,6 +17,11 @@ services:
                 constraints: ["node.hostname == ${NODE0}"]
     command: >
         bash -c "wget https://www.mlpack.org/datasets/ml-20m/ratings-only.csv.gz
+                sudo apt-get update
+                sudo apt-get install -y linux-tools-generic
+                sudo apt-get install -y linux-cloud-tools-generic 
+                sudo apt-get install -y linux-tools-5.4.0-164-generic
+                sudo apt-get install -y linux-cloud-tools-5.4.0-164-generic
                 gunzip ratings-only.csv.gz
                 mv ./ratings-only.csv /home/user_to_movie_ratings.csv
                 rm /home/user_to_movie_ratings_shard*.txt;shards_num=100;split -d --additional-suffix=.txt -l $$(($$(($$(wc -l < /home/user_to_movie_ratings.csv)+shards_num-1))/shards_num)) /home/user_to_movie_ratings.csv /home/user_to_movie_ratings_shard
@@ -28,7 +33,7 @@ services:
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     volumes:
-        - /microsuite/MicroSuite:/home/data
+        - ~/MicroSuite:/home/data
     expose:
         - "50051"
     cap_add:
@@ -40,6 +45,11 @@ services:
                 constraints: ["node.hostname == ${NODE1}"]
     command: >
         bash -c "cd /MicroSuite/src/SetAlgebra/union_service/service/
+                sudo apt-get update
+                sudo apt-get install -y linux-tools-generic
+                sudo apt-get install -y linux-cloud-tools-generic 
+                sudo apt-get install -y linux-tools-5.4.0-164-generic
+                sudo apt-get install -y linux-cloud-tools-5.4.0-164-generic
                 while ! echo exit | nc bucket 50050; do sleep 1; done
                 echo 'bucket launched'
                 touch lookup_servers_IP.txt
@@ -51,7 +61,7 @@ services:
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     volumes:
-        - /microsuite/MicroSuite:/home/data
+        - ~/MicroSuite:/home/data
     cap_add:
         - SYS_PTRACE
     deploy:
@@ -61,6 +71,11 @@ services:
                 constraints: ["node.hostname == ${NODE2}"]
     command: >
         bash -c "wget https://www.mlpack.org/datasets/ml-20m/ratings-only.csv.gz
+                sudo apt-get update
+                sudo apt-get install -y linux-tools-generic
+                sudo apt-get install -y linux-cloud-tools-generic 
+                sudo apt-get install -y linux-tools-5.4.0-164-generic
+                sudo apt-get install -y linux-cloud-tools-5.4.0-164-generic
                 gunzip ratings-only.csv.gz
                 mv ./ratings-only.csv /home/user_to_movie_ratings.csv
                 perl missingmovies.pl /home/user_to_movie_ratings.csv

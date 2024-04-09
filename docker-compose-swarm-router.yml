@@ -5,7 +5,7 @@ services:
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     volumes:
-        - /microsuite/MicroSuite:/home/data
+        - ~/MicroSuite:/home/data
     expose:
         - "50050"
         - "11211"
@@ -18,6 +18,13 @@ services:
                 constraints: ["node.hostname == ${NODE0}"]
     command: >
         bash -c "service memcached restart
+                sudo apt-get update
+                sudo apt-get install -y linux-tools-generic
+                sudo apt-get install -y linux-cloud-tools-generic 
+                sudo apt-get install -y linux-tools-generic
+                sudo apt-get install -y linux-cloud-tools-generic 
+                sudo apt-get install -y linux-tools-5.4.0-164-generic
+                sudo apt-get install -y linux-cloud-tools-5.4.0-164-generic
                 cd /MicroSuite/src/Router/lookup_service/service
                 ./lookup_server 0.0.0.0:50050 11211 -1 1"
 
@@ -26,7 +33,7 @@ services:
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     volumes:
-        - /microsuite/MicroSuite:/home/data
+        - ~/MicroSuite:/home/data
     expose:
         - "50051"
     cap_add:
@@ -38,6 +45,11 @@ services:
                 constraints: ["node.hostname == ${NODE1}"]
     command: >
         bash -c "cd /MicroSuite/src/Router/mid_tier_service/service/
+                sudo apt-get update
+                sudo apt-get install -y linux-tools-generic
+                sudo apt-get install -y linux-cloud-tools-generic 
+                sudo apt-get install -y linux-tools-5.4.0-164-generic
+                sudo apt-get install -y linux-cloud-tools-5.4.0-164-generic
                 while ! echo exit | nc bucket 50050; do sleep 1; done
                 echo 'bucket launched'
                 touch lookup_servers_IP.txt
@@ -49,7 +61,7 @@ services:
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     volumes:
-        - /microsuite/MicroSuite:/home/data
+        - ~/MicroSuite:/home/data
     cap_add:
         - SYS_PTRACE
     deploy:
@@ -60,6 +72,11 @@ services:
     command: >
         bash -c "wget https://akshithasriraman.eecs.umich.edu/dataset/Router/twitter_requests_data_set.dat
                 wget https://akshithasriraman.eecs.umich.edu/dataset/Router/twitter_requests_data_set.txt
+                sudo apt-get update
+                sudo apt-get install -y linux-tools-generic
+                sudo apt-get install -y linux-cloud-tools-generic 
+                sudo apt-get install -y linux-tools-5.4.0-164-generic
+                sudo apt-get install -y linux-cloud-tools-5.4.0-164-generic
                 mv ./twitter_requests_data_set.dat /home
                 mv ./twitter_requests_data_set.txt /home
                 while ! echo exit | nc midtier 50051; do sleep 1; done

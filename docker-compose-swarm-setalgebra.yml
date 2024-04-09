@@ -5,7 +5,7 @@ services:
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     volumes:
-        - /microsuite/MicroSuite:/home/data
+        - ~/MicroSuite:/home/data
     expose:
         - "50050"
     cap_add:
@@ -17,6 +17,9 @@ services:
                 constraints: ["node.hostname == ${NODE0}"]
     command: >
         bash -c "wget https://akshithasriraman.eecs.umich.edu/dataset/SetAlgebra/wordIDs_mapped_to_posting_lists.txt
+                sudo apt-get update
+                sudo apt-get install -y linux-tools-5.4.0-164-generic
+                sudo apt-get install -y linux-cloud-tools-5.4.0-164-generic
                 mv ./wordIDs_mapped_to_posting_lists.txt /home
                 rm /home/setalgebra_shrad*.txt;shrads_num=10;split -d --additional-suffix=.txt -l $$(($$(($$(wc -l < /home/wordIDs_mapped_to_posting_lists.txt)+shrads_num-1))/shrads_num)) /home/wordIDs_mapped_to_posting_lists.txt /home/setalgebra_shrad
                 shuf -n 100 /home/wordIDs_mapped_to_posting_lists.txt > /home/setalgebra_query_set.txt
@@ -28,7 +31,7 @@ services:
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     volumes:
-        - /microsuite/MicroSuite:/home/data
+        - ~/MicroSuite:/home/data
     expose:
         - "50051"
     cap_add:
@@ -40,6 +43,11 @@ services:
                 constraints: ["node.hostname == ${NODE1}"]
     command: >
         bash -c "cd /MicroSuite/src/SetAlgebra/union_service/service/
+                sudo apt-get update
+                sudo apt-get install -y linux-tools-generic
+                sudo apt-get install -y linux-cloud-tools-generic 
+                sudo apt-get install -y linux-tools-5.4.0-164-generic
+                sudo apt-get install -y linux-cloud-tools-5.4.0-164-generic
                 while ! echo exit | nc bucket 50050; do sleep 1; done
                 echo 'bucket launched'
                 touch lookup_servers_IP.txt
@@ -51,7 +59,7 @@ services:
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     volumes:
-        - /microsuite/MicroSuite:/home/data
+        - ~/MicroSuite:/home/data
     cap_add:
         - SYS_PTRACE
     deploy:
@@ -61,6 +69,11 @@ services:
                 constraints: ["node.hostname == ${NODE2}"]
     command: >
         bash -c "wget https://akshithasriraman.eecs.umich.edu/dataset/SetAlgebra/wordIDs_mapped_to_posting_lists.txt
+                sudo apt-get update
+                sudo apt-get install -y linux-tools-generic
+                sudo apt-get install -y linux-cloud-tools-generic 
+                sudo apt-get install -y linux-tools-5.4.0-164-generic
+                sudo apt-get install -y linux-cloud-tools-5.4.0-164-generic
                 mv ./wordIDs_mapped_to_posting_lists.txt /home
                 shuf -n 100 /home/wordIDs_mapped_to_posting_lists.txt > /home/setalgebra_query_set.txt
                 while ! echo exit | nc midtier 50051; do sleep 1; done
