@@ -21,38 +21,37 @@ If you use this software in your work, we request that you cite the µSuite pape
 # Installation
 To install µSuite, please follow these steps (works on Ubuntu 18.04):
 
-# (1) ** Setup docker, cli and compose **
-
+# (1) Clone this repository IN YOUR HOME DIRECTORY 
 ```
-curl -fsSL https://get.docker.com -o get-docker.sh
-DRY_RUN=1 sh ./get-docker.sh
-sudo sh get-docker.sh
-sudo apt -y install docker-compose
-```
-## for saving docker login to be able to push images
-```
-sudo apt -y install gnupg2 pass 
-```
-## change the storage folder for more space to commit the image (in our case when we use Cloudlab)
-```
-sudo docker rm -f $(docker ps -aq); docker rmi -f $(docker images -q)
-sudo systemctl stop docker
-umount /var/lib/docker
-sudo rm -rf /var/lib/docker
-sudo mkdir /var/lib/docker
-sudo mkdir /dev/mkdocker
-sudo mount --rbind /dev/mkdocker /var/lib/docker
-sudo systemctl start docker
-```
-
-# (2) ** Create a docker instance using our precompiled docker image **
-
-```
-mkdir microsuite
-cd microsuite
+cd
 git clone https://github.com/ucy-xilab/MicroSuite.git
 cd MicroSuite
 ```
+
+# (2) Setup docker, cli and compose 
+
+```
+for node in node2 node1 node0
+do
+  ssh $node "curl -fsSL https://get.docker.com -o get-docker.sh; DRY_RUN=1 sh ./get-docker.sh; sudo sh get-docker.sh; sudo apt -y install docker-compose"
+done
+```
+## for saving docker login to be able to push images
+```
+for node in node2 node1 node0
+do
+  ssh $node "sudo apt -y install gnupg2 pass"
+done
+```
+## change the storage folder for more space to commit the image (in our case when we use Cloudlab)
+```
+for node in node2 node1 node0
+do
+  ssh $node "sudo docker rm -f $(docker ps -aq); docker rmi -f $(docker images -q); sudo systemctl stop docker; umount /var/lib/docker; sudo rm -rf /var/lib/docker"
+  ssh $node "sudo mkdir /var/lib/docker; sudo mkdir /dev/mkdocker; sudo mount --rbind /dev/mkdocker /var/lib/docker; sudo systemctl start docker"
+done
+```
+
 ## Change to docker group
 ```
 sudo newgrp docker
@@ -64,23 +63,22 @@ sudo docker compose up
 
 At this point we need to open a new terminal and login on the docker instance to execute our benchmark
 ```
-cd microsuite
-su
-docker-compose exec hdsearch sh
+cd Microsuite
+sudo docker-compose exec hdsearch sh
 ```
 
 From this point on we can execute each benchmark based on the commands provided in section (4)
 
-# (3) ** Run a multinode execution **
+# (3) Run a multinode execution 
 
 ## All following commands should be run only on Node 0
 ## Close any docker-compose already running through the cloudlab profile
 ```
-parallel-ssh -H "node0 node1 node2" -i "cd /microsuite/MicroSuite && sudo docker-compose down"
+parallel-ssh -H "node0 node1 node2" -i "cd ~/MicroSuite && sudo docker-compose down"
 ```
 ## Download dataset
 ```
-cd /microsuite/MicroSuite && sudo wget https://akshithasriraman.eecs.umich.edu/dataset/HDSearch/image_feature_vectors.dat
+cd ~/MicroSuite && sudo wget https://akshithasriraman.eecs.umich.edu/dataset/HDSearch/image_feature_vectors.dat
 ```
 ## Create swarm on Node 0
 ```
@@ -95,7 +93,12 @@ export NODE0=$(ssh node0 hostname)
 export NODE1=$(ssh node1 hostname)
 export NODE2=$(ssh node2 hostname)
 
-cd /microsuite/MicroSuite
+for node in node1 node2
+do
+    ssh $node "mkdir MicroSuite"
+done
+
+cd ~/MicroSuite
 sudo docker stack deploy --compose-file=docker-compose-swarm.yml microsuite
 ```
 The provided docker-compose-swarm.yml file runs the HDSearch application. In order to run any other benchmark from the suite
