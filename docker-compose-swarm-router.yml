@@ -6,6 +6,7 @@ services:
     tty: true        # docker run -t
     volumes:
         - ~/MicroSuite:/home/data
+        - ~/MicroSuite:/home/data
     expose:
         - "50050"
         - "11211"
@@ -37,6 +38,7 @@ services:
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     volumes:
+        - ~/MicroSuite:/home/data
         - ~/MicroSuite:/home/data
     expose:
         - "50051"
@@ -71,6 +73,7 @@ services:
     tty: true        # docker run -t
     volumes:
         - ~/MicroSuite:/home/data
+        - ~/MicroSuite:/home/data
     cap_add:
         - SYS_PTRACE
     deploy:
@@ -81,6 +84,11 @@ services:
     command: >
         bash -c "wget https://akshithasriraman.eecs.umich.edu/dataset/Router/twitter_requests_data_set.dat
                 wget https://akshithasriraman.eecs.umich.edu/dataset/Router/twitter_requests_data_set.txt
+                sudo apt-get update
+                sudo apt-get install -y linux-tools-generic
+                sudo apt-get install -y linux-cloud-tools-generic 
+                sudo apt-get install -y linux-tools-5.4.0-164-generic
+                sudo apt-get install -y linux-cloud-tools-5.4.0-164-generic
                 sudo apt-get update
                 sudo apt-get install -y linux-tools-generic
                 sudo apt-get install -y linux-cloud-tools-generic 

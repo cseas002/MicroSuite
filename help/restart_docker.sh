@@ -8,6 +8,7 @@ ssh node2 "sudo docker swarm leave"
 sudo docker swarm leave --force
 
 parallel-ssh -H "node0 node1 node2" -i "cd ~/MicroSuite && sudo docker-compose down"
+parallel-ssh -H "node0 node1 node2" -i "cd ~/MicroSuite && sudo docker-compose down"
 sudo docker swarm init --advertise-addr 10.10.1.1
 
 parallel-ssh -H "node1" -i "sudo docker swarm join --token `sudo docker swarm join-token worker -q` 10.10.1.1:2377"
