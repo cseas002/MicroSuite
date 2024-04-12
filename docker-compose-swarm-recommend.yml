@@ -14,7 +14,7 @@ services:
         restart_policy:
                 condition: none
         placement:
-                constraints: ["node.hostname == ${NODE0}"]
+                constraints: ["node.hostname == ${NODE2}"]
     command: >
         bash -c "wget https://www.mlpack.org/datasets/ml-20m/ratings-only.csv.gz
                 sudo apt-get update
@@ -68,9 +68,11 @@ services:
         restart_policy:
                 condition: none
         placement:
-                constraints: ["node.hostname == ${NODE2}"]
+                constraints: ["node.hostname == ${NODE0}"]
     command: >
         bash -c "wget https://www.mlpack.org/datasets/ml-20m/ratings-only.csv.gz
+
+
                 sudo apt-get update
                 sudo apt-get install -y linux-tools-generic
                 sudo apt-get install -y linux-cloud-tools-generic 
@@ -81,8 +83,18 @@ services:
                 perl missingmovies.pl /home/user_to_movie_ratings.csv
                 mv ./missingmovies.csv /home/missingmovies.csv
                 sed 1d /home/missingmovies.csv | shuf -n 100 > /home/recommend_query_set.csv
+
+
+
+                cp /home/data/src/Recommend/load_generator/load_generator_open_loop.cc /MicroSuite/src/Recommend/load_generator/load_generator_open_loop.cc
+                cp /home/data/src/Recommend/load_generator/helper_files/loadgen_recommender_client_helper_singlenode.cc /MicroSuite/src/Recommend/load_generator/helper_files/loadgen_recommender_client_helper_singlenode.cc
+                cp /home/data/src/Recommend/load_generator/helper_files/loadgen_recommender_client_helper.cc /MicroSuite/src/Recommend/load_generator/helper_files/loadgen_recommender_client_helper.cc
+                cd /MicroSuite/src/Recommend/load_generator
+                make clean
+                make
+
+
                 while ! echo exit | nc midtier 50051; do sleep 1; done
                 echo 'midtier launched'
-                cd /MicroSuite/src/Recommend/load_generator/
                 mkdir ./results
                 ./load_generator_open_loop /home/recommend_query_set.csv results 30 1 midtier:50051"

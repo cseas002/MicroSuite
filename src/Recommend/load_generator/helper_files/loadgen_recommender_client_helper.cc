@@ -1,4 +1,5 @@
 #include "loadgen_recommender_client_helper.h"
+#include <numeric> // Include the numeric header for accumulate
 
 LoadGenCommandLineArgs *ParseLoadGenCommandLine(const int &argc,
                                                 char **argv)
@@ -293,7 +294,7 @@ void PrintGlobalStats(const GlobalStats &global_stats,
 }
 
 void PrintLatency(const GlobalStats &global_stats,
-                  const unsigned int number_of_cf_servers,
+                  const unsigned int number_of_bucket_servers,
                   const unsigned int util_requests,
                   const unsigned int responses_recvd)
 {
@@ -304,8 +305,8 @@ void PrintLatency(const GlobalStats &global_stats,
         total_response_time.push_back(global_stats.timing_info[i].total_resp_time);
     }
     std::sort(total_response_time.begin(), total_response_time.end());
-    // uint64_t size = total_response_time.size();
-    // std::cout << (float)total_response_time[0.5*size]/1000.0 << " " << (float)total_response_time[0.99*size]/1000.0 << " ";
+    uint64_t size = total_response_time.size();
+    std::cout << "Average Response Time(ms): " << (double)std::accumulate(total_response_time.begin(), total_response_time.end(), (unsigned long long)0) / (double)size / (double)1000 << " \n";
     PrintTime(total_response_time);
 }
 

@@ -77,7 +77,7 @@ services:
         placement:
                 constraints: ["node.hostname == ${NODE0}"]
     command: >
-        bash -c "ls -l /home/data/
+        bash -c "
                 wget https://akshithasriraman.eecs.umich.edu/dataset/Router/twitter_requests_data_set.dat
                 wget https://akshithasriraman.eecs.umich.edu/dataset/Router/twitter_requests_data_set.txt
                 sudo apt-get update

@@ -16,4 +16,4 @@ parallel-ssh -H "node2" -i "sudo docker swarm join --token `sudo docker swarm jo
 
 cd ..
 # sudo docker stack deploy --compose-file=docker-compose-swarm.yml microsuite
-docker stack deploy --compose-file=docker-compose-swarm-router.yml microsuite
+docker stack deploy --compose-file=docker-compose-swarm-recommend.yml microsuite

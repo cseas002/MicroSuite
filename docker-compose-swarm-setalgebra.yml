@@ -14,7 +14,7 @@ services:
         restart_policy:
                 condition: none
         placement:
-                constraints: ["node.hostname == ${NODE0}"]
+                constraints: ["node.hostname == ${NODE2}"]
     command: >
         bash -c "wget https://akshithasriraman.eecs.umich.edu/dataset/SetAlgebra/wordIDs_mapped_to_posting_lists.txt
                 sudo apt-get update
@@ -66,9 +66,10 @@ services:
         restart_policy:
                 condition: none
         placement:
-                constraints: ["node.hostname == ${NODE2}"]
+                constraints: ["node.hostname == ${NODE0}"]
     command: >
-        bash -c "wget https://akshithasriraman.eecs.umich.edu/dataset/SetAlgebra/wordIDs_mapped_to_posting_lists.txt
+        bash -c "
+                wget https://akshithasriraman.eecs.umich.edu/dataset/SetAlgebra/wordIDs_mapped_to_posting_lists.txt
                 sudo apt-get update
                 sudo apt-get install -y linux-tools-generic
                 sudo apt-get install -y linux-cloud-tools-generic 
@@ -76,8 +77,17 @@ services:
                 sudo apt-get install -y linux-cloud-tools-5.4.0-164-generic
                 mv ./wordIDs_mapped_to_posting_lists.txt /home
                 shuf -n 100 /home/wordIDs_mapped_to_posting_lists.txt > /home/setalgebra_query_set.txt
+
+
+                cp /home/data/src/SetAlgebra/load_generator/load_generator_open_loop.cc /MicroSuite/src/SetAlgebra/load_generator/load_generator_open_loop.cc
+                cp /home/data/src/SetAlgebra/load_generator/helper_files/loadgen_union_client_helper_singlenode.cc /MicroSuite/src/SetAlgebra/load_generator/helper_files/loadgen_union_client_helper_singlenode.cc
+                cp /home/data/src/SetAlgebra/load_generator/helper_files/loadgen_union_client_helper.cc /MicroSuite/src/SetAlgebra/load_generator/helper_files/loadgen_union_client_helper.cc
+                cd /MicroSuite/src/SetAlgebra/load_generator
+                make clean
+                make
+
+                
                 while ! echo exit | nc midtier 50051; do sleep 1; done
                 echo 'midtier launched'
-                cd /MicroSuite/src/SetAlgebra/load_generator
                 mkdir ./results
                 ./load_generator_open_loop /home/setalgebra_query_set.txt ./results 68 3500 midtier:50054"
