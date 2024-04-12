@@ -31,10 +31,11 @@ cd MicroSuite
 # (2) Setup docker, cli and compose 
 
 ```
-for node in node2 node1 node0
+bash install_docker.sh
+<!-- for node in node2 node1 node0
 do
   ssh $node "curl -fsSL https://get.docker.com -o get-docker.sh; DRY_RUN=1 sh ./get-docker.sh; sudo sh get-docker.sh; sudo apt -y install docker-compose"
-done
+done -->
 ```
 ## for saving docker login to be able to push images
 ```

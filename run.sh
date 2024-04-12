@@ -12,6 +12,9 @@ do
 done
 
 
+bash install_docker.sh
+
+
 # sudo docker rm -f $(docker ps -aq); docker rmi -f $(docker images -q)
 # sudo systemctl stop docker
 # umount /var/lib/docker # THIS DOESN'T WORK
