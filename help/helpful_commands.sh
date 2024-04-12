@@ -21,8 +21,10 @@ sudo docker stack deploy --compose-file=docker-compose-swarm-setalgebra.yml micr
 # After running the experiment, save the log files (it doesn't save them automatically)
 
 
+sudo mkdir /mydata/Helpers
+
 # To check
 sudo docker stack ps microsuite
 
 # For logs
-sudo docker service logs --raw microsuite_midtier  # (or _midtier, _client)
+sudo docker service logs --raw microsuite_client  # (or _midtier, _client)

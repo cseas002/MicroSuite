@@ -1,4 +1,5 @@
 #include "loadgen_router_client_helper.h"
+#include <numeric> // Include the numeric header for accumulate
 
 LoadGenCommandLineArgs *ParseLoadGenCommandLine(const int &argc,
                                                 char **argv)
@@ -236,7 +237,7 @@ void UpdateGlobalUtilStats(PercentUtilInfo *percent_util_info,
 void PrintTime(std::vector<uint64_t> time_vec)
 {
     uint64_t size = time_vec.size();
-    std::cout << (float)time_vec[0.1 * size] / 1000.0 << " " << (float)time_vec[0.2 * size] / 1000.0 << " " << (float)time_vec[0.3 * size] / 1000.0 << " " << (float)time_vec[0.4 * size] / 1000.0 << " " << (float)time_vec[0.5 * size] / 1000.0 << " " << (float)time_vec[0.6 * size] / 1000.0 << " " << (float)time_vec[0.7 * size] / 1000.0 << " " << (float)time_vec[0.8 * size] / 1000.0 << " " << (float)time_vec[0.9 * size] / 1000.0 << " " << (float)(float)time_vec[0.95 * size] / 1000.0 << " " << (float)(float)time_vec[0.99 * size] / 1000.0 << " " << (float)(float)time_vec[0.999 * size] / 1000.0 << " ";
+    std::cout << "10th: " << (double)time_vec[0.1 * size] / 1000.0 << " 20th: " << (double)time_vec[0.2 * size] / 1000.0 << " 30th: " << (double)time_vec[0.3 * size] / 1000.0 << " 40th: " << (double)time_vec[0.4 * size] / 1000.0 << " 50th: " << (double)time_vec[0.5 * size] / 1000.0 << " 60th: " << (double)time_vec[0.6 * size] / 1000.0 << " 70th: " << (double)time_vec[0.7 * size] / 1000.0 << " 80th: " << (double)time_vec[0.8 * size] / 1000.0 << " 90th: " << (double)time_vec[0.9 * size] / 1000.0 << " 95th: " << (double)(double)time_vec[0.95 * size] / 1000.0 << " 99th: " << (double)(double)time_vec[0.99 * size] / 1000.0 << " 999th: " << (double)(double)time_vec[0.999 * size] / 1000.0 << " ";
 }
 
 float ComputeQueryCost(const GlobalStats &global_stats,
