@@ -27,6 +27,11 @@ services:
                 wget https://akshithasriraman.eecs.umich.edu/dataset/Router/twitter_requests_data_set.txt
                 mv ./twitter_requests_data_set.dat /home
                 mv ./twitter_requests_data_set.txt /home
+
+                # cd /home/data
+                # gcc server.c -o server
+                # taskset -c 1 ./server &
+
                 cd /MicroSuite/src/Router/lookup_service/service
                 ./lookup_server 0.0.0.0:50050 11211 -1 1"
 
@@ -52,11 +57,17 @@ services:
                 sudo apt-get install -y linux-cloud-tools-generic 
                 sudo apt-get install -y linux-tools-5.4.0-164-generic
                 sudo apt-get install -y linux-cloud-tools-5.4.0-164-generic
+
                 
                 wget https://akshithasriraman.eecs.umich.edu/dataset/Router/twitter_requests_data_set.dat
                 wget https://akshithasriraman.eecs.umich.edu/dataset/Router/twitter_requests_data_set.txt
                 mv ./twitter_requests_data_set.dat /home
                 mv ./twitter_requests_data_set.txt /home
+
+                cp /home/data/mid_tier_server.cc /MicroSuite/src/Router/mid_tier_service/service/mid_tier_server.cc
+                make clean 
+                make
+
                 while ! echo exit | nc bucket 50050; do sleep 1; done
                 echo 'bucket launched'
                 touch lookup_servers_IP.txt
@@ -100,6 +111,6 @@ services:
 
                 
 
-                
+                # Queries is the 3rd argument (<program> <result_file_name> <time_duration> <qps>)
                 mkdir ./results
                 ./load_generator_open_loop /home/twitter_requests_data_set.dat ./results 30 10 midtier:50051 10 0"
