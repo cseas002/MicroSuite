@@ -1,2 +1,11 @@
-Average Response Time(ms): 1.58263 
-10th: 1.48 20th: 1.499 30th: 1.508 40th: 1.522 50th: 1.543 60th: 1.558 70th: 1.575 80th: 1.592 90th: 1.615 95th: 1.646 99th: 1.863 999th: 12.178  0 got kill ack
+Average Response Time(ms): 1.65724 
+10th: 1.549 20th: 1.575 30th: 1.591 40th: 1.602 50th: 1.616 60th: 1.631 70th: 1.646 80th: 1.663 90th: 1.701 95th: 1.732 99th: 1.984 999th: 11.66  
+
+
+50 us pre:
+Average Response Time(ms): 1.61919 
+10th: 1.502 20th: 1.53 30th: 1.549 40th: 1.57 50th: 1.585 60th: 1.599 70th: 1.615 80th: 1.632 90th: 1.667 95th: 1.695 99th: 1.924 999th: 11.762
+Results:
+
+
+

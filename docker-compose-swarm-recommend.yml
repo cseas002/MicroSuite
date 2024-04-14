@@ -44,12 +44,17 @@ services:
         placement:
                 constraints: ["node.hostname == ${NODE1}"]
     command: >
-        bash -c "cd /MicroSuite/src/SetAlgebra/union_service/service/
+        bash -c "cd /MicroSuite/src/Recommend/recommender_service/service/
                 sudo apt-get update
                 sudo apt-get install -y linux-tools-generic
                 sudo apt-get install -y linux-cloud-tools-generic 
                 sudo apt-get install -y linux-tools-5.4.0-164-generic
                 sudo apt-get install -y linux-cloud-tools-5.4.0-164-generic
+
+                cp /home/data/mid_tier_server.cc /MicroSuite/src/Router/mid_tier_service/service/mid_tier_server.cc
+                make clean 
+                make
+                
                 while ! echo exit | nc bucket 50050; do sleep 1; done
                 echo 'bucket launched'
                 touch lookup_servers_IP.txt

@@ -1,4 +1,5 @@
 #include "loadgen_union_client_helper.h"
+#include <numeric> // Include the numeric header for accumulate
 
 LoadGenCommandLineArgs *ParseLoadGenCommandLine(const int &argc,
                                                 char **argv)

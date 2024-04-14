@@ -1,0 +1,7 @@
+
+Results:
+
+Average 30: 
+99th Percentile tail latency 30: 2.02
+Maximum 99th Percentile tail latency 30: 2.021
+

@@ -1,0 +1,46 @@
+all_results.txt:
+No data found in the file.
+
+
+results_0.txt:
+Average of averages: 1.487862
+Average of the 99th percentile tail latencies: 1.8041999999999998
+Highest 99th percentile tail latency: 1.916
+
+
+results_100.txt:
+Average of averages: 1.5272459999999999
+Average of the 99th percentile tail latencies: 1.8466
+Highest 99th percentile tail latency: 1.931
+
+
+results_150.txt:
+Average of averages: 1.553908
+Average of the 99th percentile tail latencies: 1.841
+Highest 99th percentile tail latency: 1.883
+
+
+results_-1.txt:
+Average of averages: 1.6777279999999997
+Average of the 99th percentile tail latencies: 1.9816000000000003
+Highest 99th percentile tail latency: 2.021
+
+
+results_200.txt:
+Average of averages: 1.543758
+Average of the 99th percentile tail latencies: 1.8270000000000004
+Highest 99th percentile tail latency: 1.857
+
+
+results_50.txt:
+Average of averages: 1.5183839999999997
+Average of the 99th percentile tail latencies: 1.8328000000000002
+Highest 99th percentile tail latency: 1.955
+
+
+router.txt:
+Average of averages: 1.638215
+Average of the 99th percentile tail latencies: 1.954
+Highest 99th percentile tail latency: 1.984
+
+

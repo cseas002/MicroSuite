@@ -895,7 +895,7 @@ int main(int argc, char **argv)
     struct sockaddr_in serv_addr1, serv_addr2;
     bool poisson, fixed, exponential, pre_request;
 
-    send_request_time = -1;
+    send_request_time = 200;
     pre_request = true; // atoi(argv[2]);
 
     char *hello = "Hello from client";
