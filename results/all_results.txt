@@ -4,38 +4,42 @@ No data found in the file.
 
 results_0.txt:
 Average of averages: 1.487862
-Average of the 99th percentile tail latencies: 1.8041999999999998
+Average of the 99th percentile tail latencies: 1.7889
 Highest 99th percentile tail latency: 1.916
 
 
 results_100.txt:
 Average of averages: 1.5272459999999999
-Average of the 99th percentile tail latencies: 1.8466
+Average of the 99th percentile tail latencies: 1.8012000000000001
 Highest 99th percentile tail latency: 1.931
 
 
 results_150.txt:
 Average of averages: 1.553908
-Average of the 99th percentile tail latencies: 1.841
+Average of the 99th percentile tail latencies: 1.7901999999999998
 Highest 99th percentile tail latency: 1.883
 
 
 results_-1.txt:
 Average of averages: 1.6777279999999997
-Average of the 99th percentile tail latencies: 1.9816000000000003
+Average of the 99th percentile tail latencies: 1.9461000000000006
 Highest 99th percentile tail latency: 2.021
 
 
 results_200.txt:
 Average of averages: 1.543758
-Average of the 99th percentile tail latencies: 1.8270000000000004
+Average of the 99th percentile tail latencies: 1.7816666666666672
 Highest 99th percentile tail latency: 1.857
 
 
 results_50.txt:
 Average of averages: 1.5183839999999997
-Average of the 99th percentile tail latencies: 1.8328000000000002
+Average of the 99th percentile tail latencies: 1.7884
 Highest 99th percentile tail latency: 1.955
+
+
+results_setalgebra_-1.txt:
+No data found in the file.
 
 
 router.txt:

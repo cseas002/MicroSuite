@@ -11,3 +11,13 @@ Average Response Time(ms): 1.7066
 
 
 
+1 1 1 Average Response Time(ms): 1.64744 
+10th: 1.574 20th: 1.593 30th: 1.606 40th: 1.619 50th: 1.632 60th: 1.644 70th: 1.657 80th: 1.677 90th: 1.703 95th: 1.731 99th: 1.884 999th: 12.154  0 got kill ack
+1 1 1 Average Response Time(ms): 1.65456 
+10th: 1.58 20th: 1.602 30th: 1.617 40th: 1.627 50th: 1.638 60th: 1.648 70th: 1.662 80th: 1.682 90th: 1.708 95th: 1.737 99th: 1.992 999th: 12.4  0 got kill ack
+1 1 1 Average Response Time(ms): 1.62172 
+10th: 1.541 20th: 1.563 30th: 1.577 40th: 1.59 50th: 1.604 60th: 1.617 70th: 1.631 80th: 1.651 90th: 1.683 95th: 1.708 99th: 1.887 999th: 14.778  0 got kill ack
+1 1 1 Average Response Time(ms): 1.61277 
+10th: 1.538 20th: 1.558 30th: 1.573 40th: 1.584 50th: 1.595 60th: 1.607 70th: 1.621 80th: 1.639 90th: 1.667 95th: 1.704 99th: 1.879 999th: 12.657  0 got kill ack
+1 1 1 Average Response Time(ms): 1.63257 
+10th: 1.555 20th: 1.577 30th: 1.592 40th: 1.603 50th: 1.616 60th: 1.631 70th: 1.645 80th: 1.664 90th: 1.692 95th: 1.719 99th: 1.911 999th: 11.829  0 got kill ack

@@ -113,4 +113,4 @@ services:
 
                 # Queries is the 3rd argument (<program> <result_file_name> <time_duration> <qps>)
                 mkdir ./results
-                ./load_generator_open_loop /home/twitter_requests_data_set.dat ./results 30 10 midtier:50051 10 0"
+                ./load_generator_open_loop /home/twitter_requests_data_set.dat ./results 100 10 midtier:50051 10 0"

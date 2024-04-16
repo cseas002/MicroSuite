@@ -39,6 +39,6 @@ do
         docker stack deploy --compose-file=docker-compose-swarm-router.yml microsuite
 
         sleep 300
-        sudo docker service logs --raw microsuite_client | tail -n 3 | head -n 2 >> ./results/results_$send_request_time.txt
+        sudo docker service logs --raw microsuite_client | tail -n 3 | head -n 2 >> ./results/results_100_$send_request_time.txt
     done
 done
